@@ -1,17 +1,22 @@
-#include<iostream>
+#include <vector>
+#include <algorithm>
+
 using namespace std;
-int main (){
-    int n;
-    cin>>n;
-    int row=1;
-    while(row<=n){
-        int col=1;
-        while(col<=row){
-            char ch =row+col+'A'-2;
-            cout<<ch;
-            col=col+1;
-        }
-        cout<<endl;
-        row=row+1;
+
+int solution(vector<int> &A, int X, int Y) {
+    int N = A.size();
+    
+    int totalCost = 0;
+    for (int i = 0; i < X; ++i) {
+        totalCost += A[i];
     }
+    
+    int minCost = totalCost;
+    
+    for (int i = X; i < N; ++i) {
+        totalCost = totalCost - A[i - X] + A[i];
+        minCost = min(minCost, totalCost);
+    }
+    
+    return minCost;
 }
